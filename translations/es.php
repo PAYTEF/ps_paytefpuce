@@ -25,6 +25,12 @@ $_MODULE['<{ps_paytefpuce}prestashop>ps_paytefpuce_57766e0e46b662a7e346342a5c5db
 $_MODULE['<{ps_paytefpuce}prestashop>ps_paytefpuce_6e1aa44bd3c326bf778a4802a3cc57d2'] = 'Clave secreta MAC';
 $_MODULE['<{ps_paytefpuce}prestashop>ps_paytefpuce_c9cc8cce247e49bae79f15173ce97354'] = 'Guardar';
 $_MODULE['<{ps_paytefpuce}prestashop>ps_paytefpuce_4ee7c21cc199386cd0c671307e746ce5'] = 'Pagar con tarjeta de crédito mediante PAYTEF';
+$_MODULE['<{ps_paytefpuce}prestashop>finish_dae8a0141f7cdd9e5497f412065d666a'] = 'Se produjo un error validando el pago. Por favor contacte al comercio o pruebe realizarlo nuevamente';
+$_MODULE['<{ps_paytefpuce}prestashop>finish_134ecd316c72e3ff0995d4563596357c'] = 'Se produjo un error validando el pago. Por favor contacte al comercio o pruebe realizarlo nuevamente.';
+$_MODULE['<{ps_paytefpuce}prestashop>finish_557a763be826823b9a18baf8bbcb99ef'] = 'Se produjo un error validando los datos del pago. Por favor contacte al comercio o pruebe realizarlo nuevamente.';
+$_MODULE['<{ps_paytefpuce}prestashop>finish_e7ea61bef484935598e4e904fc077ead'] = 'Su pago fue aprobado pero se produjo un error al validar la orden. Por favor contacte con el comercio para solucionar el problema.';
+$_MODULE['<{ps_paytefpuce}prestashop>finish_e1a4eebe2cbe752dc51e57d0f5dad9f6'] = 'Parece que la tarjeta fue declinada, puede probar realizar el pago nuevamente.';
+$_MODULE['<{ps_paytefpuce}prestashop>finish_58c0e18bce7776be52a32da9fb27b8fb'] = 'Se produjo un error inesperado. Por favor contacte con el comercio o pruebe nuevamente.';
 $_MODULE['<{ps_paytefpuce}prestashop>configure_76ac64e47254d5a87d9ac646ca46e188'] = 'PAYTEF PUCE - Procesamiento de pagos online';
 $_MODULE['<{ps_paytefpuce}prestashop>configure_61645d37dd28ef4de6a60173f52c2364'] = 'Compatible con 3D Secure 1.0';
 $_MODULE['<{ps_paytefpuce}prestashop>configure_f40a4d4e81fa484651236cd7a242fec9'] = 'Esto provee validación del usuario con la entidad bancaria y transacciones seguras.';

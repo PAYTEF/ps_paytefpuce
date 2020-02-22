@@ -28,17 +28,17 @@ class Ps_PaytefPuceFinishModuleFrontController extends ModuleFrontController
         {
             $mac = $_POST['Op_MAC'];
             if(empty($mac)) {
-                return $this->displayError('An error occurred while validating your payment. Please contact the merchant for more information or try again');
+                return $this->displayError($this->module->l('An error occurred while validating your payment. Please contact the merchant for more information or try again'), array());
             }
             $calcMac = PuceUtils::calculateResultsMAC($_POST);
             if($mac != $calcMac) {
-                return $this->displayError('An error occurred while validating your payment. Please contact the merchant for more information or try again.');
+                return $this->displayError($this->module->l('An error occurred while validating your payment. Please contact the merchant for more information or try again.'), array());
             }
 
             $authID = $_POST['Op_Authorization_ID'];
             $parts = explode("-", $authID);
             if(sizeof($parts) != 2) {
-                return $this->displayError('An error occurred while validating your payment data. Please contact the merchant for more information or try again');
+                return $this->displayError($this->module->l('An error occurred while validating your payment data. Please contact the merchant for more information or try again'), array());
             }
             $customer_id = intval($parts[0]);
             $cart_id = intval($parts[1]);
@@ -60,27 +60,28 @@ class Ps_PaytefPuceFinishModuleFrontController extends ModuleFrontController
                     $secure_key = Context::getContext()->customer->secure_key;
                     Tools::redirect('index.php?controller=order-confirmation&id_cart=' . $cart_id . '&id_module=' . $module_id . '&id_order=' . $order->id . '&key=' . $secure_key);
                 } else {
-                    return $this->displayError('Payment was approved but the order seems to be in an invalid state. Please contact the merchant to resolve this issue.');
+                    return $this->displayError($this->module->l('Payment was approved but the order seems to be in an invalid state. Please contact the merchant to resolve this issue.'), array());
                 }
             } else {
-                $this->errors[] = $this->module->l("Result code: ").$resultCode;
+                $errors = array();
+                $errors[] = $this->module->l("Result code: ").$resultCode;
                 if (!empty($_POST["Op_Result_Reason"])) {
-                    $this->errors[] = $this->module->l("Reason: ").strval($_POST["Op_Result_Reason"]);
+                    $errors[] = $this->module->l("Reason: ").strval($_POST["Op_Result_Reason"]);
                 }
-                return $this->displayError('Provided payment method seems to have been declined, you can try again.');
+                return $this->displayError($this->module->l('Provided payment method seems to have been declined, you can try again.'), $errors);
             }
         } catch(Exception $ex) {
             PuceUtils::logException("PAYTEF.finish", $ex);
-            return $this->displayError('An unexpected error occurred. Please contact the merchant for more information or try again.');
+            return $this->displayError($this->module->l('An unexpected error occurred. Please contact the merchant for more information or try again.'), array());
         }
     }
 
-    protected function displayError($message)
+    protected function displayError($message, $errors)
     {
         $this->context->smarty->assign([
             'go_back' => $this->context->link->getPageLink('order', null, null, 'step=3'),
-            'message' => $this->module->l($message),
-            'errors' => $this->errors
+            'message' => $message,
+            'errors' => $errors
         ]);
         return $this->setTemplate('module:ps_paytefpuce/views/templates/front/error.tpl');
     }
