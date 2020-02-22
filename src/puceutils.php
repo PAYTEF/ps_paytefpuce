@@ -49,7 +49,7 @@ class PuceUtils
     private static function calculateMAC($body, $fieldNames)
     {
         $key = hex2bin(PuceUtils::getMacKey());
-
+        $body_lower = array_change_key_case($body);
         $payload = "";
         $first = true;
         foreach($fieldNames as $fieldName) {
@@ -58,8 +58,9 @@ class PuceUtils
             } else {
                 $payload .= "|";
             }
-            if(isset($body[$fieldName])) {
-                $payload .= strval($body[$fieldName]);
+            $fieldLower = strtolower($fieldName);
+            if(isset($body_lower[$fieldLower])) {
+                $payload .= strval($body_lower[$fieldLower]);
             }
         }
 

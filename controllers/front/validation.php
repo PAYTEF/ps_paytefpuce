@@ -18,7 +18,7 @@
 *  International Registered Trademark & Property of PAYTEF Sistemas S.L.
 */
 
-require_once "../../src/puceutils.php";
+require_once(__DIR__."/../../src/puceutils.php");
 
 class Ps_PaytefPuceValidationModuleFrontController extends ModuleFrontController
 {

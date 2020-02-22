@@ -18,7 +18,7 @@
 *  International Registered Trademark & Property of PAYTEF Sistemas S.L.
 */
 
-require_once "../../src/puceutils.php";
+require_once(__DIR__."/../../src/puceutils.php");
 
 class Ps_PaytefPuceResultsModuleFrontController extends ModuleFrontController
 {
@@ -85,6 +85,6 @@ class Ps_PaytefPuceResultsModuleFrontController extends ModuleFrontController
             PuceUtils::logException("PAYTEF.results", $ex);
             die("Error: ".$ex->getMessage());
         }
-        exit;
+        die("OK");
     }
 }

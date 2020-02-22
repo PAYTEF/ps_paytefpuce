@@ -20,19 +20,21 @@
 
 {block name="content"}
 	<section class="container">
-		<div class="row">
-			<div class="col">
-				<h3>{l s='Payment could not be processed' mod='ps_paytefpuce'}:</h3>
+		<div class="row" style="padding-top: 30px;">
+			<div class="col col-xs-8 offset-xs-2" style="text-align: center;">
+				<h3>{l s='Payment could not be processed' mod='ps_paytefpuce'}</h3>
 				<p>{$message}</p>
+				{if sizeof($errors) > 0}
 				<ul class="alert alert-danger">
 					{foreach from=$errors item='error'}
 						<li>{$error|escape:'htmlall':'UTF-8'}.</li>
 					{/foreach}
 				</ul>
+				{/if}
 			</div>
 		</div>
-		<div class="row">
-			<div class="col text-center">
+		<div class="row" style="padding-bottom: 50px;">
+			<div class="col col-xs-8 offset-xs-2" style="text-align: center;">
 				<a class="btn btn-primary" href="{$go_back}" role="button">{l s='Try again' mod='ps_paytefpuce'}</a>
 			</div>
 		</div>

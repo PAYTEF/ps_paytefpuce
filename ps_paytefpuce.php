@@ -260,6 +260,11 @@ class Ps_PaytefPuce extends PaymentModule
     public function checkCurrency($cart)
     {
         $currency_order = new Currency($cart->id_currency);
+        if (strtolower($currency_order->iso_code) == "eur") {
+            return true;
+        }
+        return false;
+        /* TODO Enabled this when multiple currencies are enabled in PUCE
         $currencies_module = $this->getCurrency($cart->id_currency);
 
         if (is_array($currencies_module)) {
@@ -269,7 +274,7 @@ class Ps_PaytefPuce extends PaymentModule
                 }
             }
         }
-        return false;
+        return false; */
     }
 
     /** @param Cart $cart */
@@ -309,11 +314,13 @@ class Ps_PaytefPuce extends PaymentModule
             $htmlInputs[$name] = ['name' => $name, 'type' =>'hidden', 'value' => $value];
         }
 
-        $htmlInfo = $this->context->smarty->fetch('module:ps_paytefpuce/views/templates/front/payment_infos.tpl');
-
+        $this->context->smarty->assign('module_dir', $this->_path);
+        $htmlInfo = $this->context->smarty->fetch($this->local_path.'views/templates/front/payment_infos.tpl');
+        //$puceBase = "http://www.pucetest.com:12334";
+        $puceBase = "https://puce.paytef.es";
         $externalOption = new PaymentOption();
-        $externalOption->setCallToActionText($this->l('Credit card payment with PAYTEF.'))
-                       ->setAction("https://puce.paytef.es/auth_card".($isTest?"?env=preprod":""))
+        $externalOption->setCallToActionText($this->l('Pay by Credit Card with PAYTEF.'))
+                       ->setAction($puceBase."/auth_card".($isTest?"?env=preprod":""))
                        ->setInputs($htmlInputs)
                        ->setAdditionalInformation($htmlInfo);
 
